@@ -20,6 +20,7 @@ def welcome(user):
 
 @app.route('/register')
 def register():
+
     form = RegisterForm()
     if form.validate_on_submit():
         result1 = form.check_email(form.email)
