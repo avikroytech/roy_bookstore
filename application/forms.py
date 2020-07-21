@@ -1,17 +1,20 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField
-from wtforms.validators import DataRequired, Email, EqualTo
+from wtforms.validators import DataRequired, Email, EqualTo, InputRequired
 from wtforms.fields.html5 import EmailField
 from application.models import User
 
 
 class RegisterForm(FlaskForm):
-    first_name = StringField('First Name: ', validators=[DataRequired()])
-    last_name = StringField('Last Name: ', validators=[DataRequired()])
-    email = EmailField('Email: ', validators=[DataRequired(), Email()])
-    username = StringField('Username: ', validators=[DataRequired()])
-    password = PasswordField('Password: ', validators=[DataRequired(), EqualTo('confirm', 'Fields have to be exact.')])
-    confirm = PasswordField('Confirm Password: ', validators=[DataRequired()])
+    first_name = StringField('First Name: ', validators=[DataRequired()], render_kw={"placeholder": "First Name"})
+    last_name = StringField('Last Name: ', validators=[DataRequired()], render_kw={"placeholder": "Last name"})
+    email = EmailField('Email: ', validators=[DataRequired(), Email()], render_kw={"placeholder": "Email Address"})
+    username = StringField('Username: ', validators=[DataRequired()], render_kw={"placeholder": "Username"})
+    password = PasswordField('Password: ', validators=[DataRequired(), EqualTo('confirm', message='Fields have to be '
+                                                                                                  'exact.')],
+                             render_kw={"placeholder": "Password"})
+    confirm = PasswordField('Confirm Password: ', validators=[DataRequired()], render_kw={"placeholder": "Confirm your"
+                                                                                                         " password"})
     submit = SubmitField('Submit')
 
     def check_email(self, field):
@@ -31,16 +34,6 @@ class LoginForm(FlaskForm):
     username = StringField('Username: ', validators=[DataRequired()])
     password = PasswordField('Password: ', validators=[DataRequired()])
     submit = SubmitField('Submit')
-
-    def checklogin(self, username, password):
-        user = User.query.get(username=username).first()
-        if user:
-            if user.password == password:
-                return user
-            else:
-                return False
-        else:
-            return False
 
 
 class ForgotForm(FlaskForm):

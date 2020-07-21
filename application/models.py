@@ -40,13 +40,7 @@ class User(db.Model, UserMixin):
         self.username = username
         self.password = password
 
-    def checkusername(self, username):
-        if username == self.username:
-            return True
-        else:
-            return False
-
-    def checkpassword(self, password):
+    def check_password(self, password):
         if password == self.password:
             return True
         else:

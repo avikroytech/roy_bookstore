@@ -1,20 +1,21 @@
 {% extends "base.html" %}
 {% block content %}
-<form method="POST">
-    {{ form.hidden_tag() }}
-{{ form.first_name.label }} {{ form.first_name }}
-{{ form.last_name.label }} {{ form.last_name }}
-{{ form.email.label }} {{ form.email }}
-{{ form.username.label }} {{ form.username }}
-{{ form.password.label }} {{ form.password }}
-{{ form.submit }}
-{% for flash in get_flashed_messages() %}
-    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-  <strong>Does this work?</strong> I hope it does!
-  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-    <span aria-hidden="true">&times</span>
-  </button>
-</div>
-{% endfor %}
-</form>
+    <form method="POST">
+        {{ form.hidden_tag() }}
+        {{ form.first_name.label }} {{ form.first_name }}
+        {{ form.last_name.label }} {{ form.last_name }}
+        {{ form.email.label }} {{ form.email }}
+        {{ form.username.label }} {{ form.username }}
+        {{ form.password.label }} {{ form.password }}
+        {{ form.confirm.label }} {{ form.confirm }}
+        {{ form.submit }}
+        {% for flash in get_flashed_messages() %}
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+          {{ flash }}
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times</span>
+          </button>
+        </div>
+        {% endfor %}
+    </form>
 {% endblock %}
