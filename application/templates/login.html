@@ -1,3 +1,10 @@
 {% extends "base.html" %}
 {% block content %}
+<form method="POST">
+    {{ form.hidden_tag() }}
+    {{ form.username.label }} {{ form.username }}<br>
+    {{ form.password.label }} {{ form.password }}<br>
+    <a href="{{url_for('forgot_password_form')}}">Forgot Password?</a>/<a href="{{url_for('register')}}">Don't have an account? Sign up here!</a><br>
+    {{ form.submit }}
+</form>
 {% endblock %}

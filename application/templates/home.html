@@ -1,3 +1,5 @@
 {% extends "base.html" %}
 {% block content %}
+{% for flash in get_flashed_messages() %}
+{%endfor%}
 {% endblock %}
