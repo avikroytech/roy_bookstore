@@ -1,3 +1,17 @@
 {% extends "base.html" %}
 {% block content %}
+<div class="jumbotron"
+     style="background-color: #1e68bd; color: #454545; padding: 50px; border-width: 4px; border-color: #182f4a">
+    <div class="card-columns">
+        {%for book in all%}
+        <div class="card" style="width: 18rem;">
+            <a href="/book_info/{{book.name}}"><img src="..." class="card-img-top" alt="Image Link"></a>
+            <div class="card-body">
+                <p class="card-text">{{book.name}} by {{book.author}} Price: ${{book.price}}0</p>
+            </div>
+        </div>
+        <br>
+        {%endfor%}
+    </div>
+</div>
 {% endblock %}

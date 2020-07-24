@@ -1,5 +1,15 @@
 {% extends "base.html" %}
 {% block content %}
+<nav class="navbar navbar-expand-lg bg-dark">
+    <a class="nav-link" href="/books/Children's">Children's Books</a>
+    <a class="nav-link" href="/books/Fiction">Fiction Books</a>
+</nav>
 {% for flash in get_flashed_messages() %}
+<div class="alert alert-danger alert-dismissible fade show" role="alert">
+    {{flash}}
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
 {%endfor%}
 {% endblock %}

@@ -2,9 +2,19 @@ from flask import current_app as app
 from flask import render_template, redirect, url_for, flash, request
 from flask_login import login_required, logout_user, login_user
 from application.forms import LoginForm, RegisterForm, ForgotForm
-from application.models import User
+from application.models import User, Book
 from application import mail, db
 from flask_mail import Message
+from application.bookinfo import books
+
+for topic in books:
+    for book in topic:
+        if Book.query.filter_by(name=book["Name"]).first():
+            continue
+        else:
+            databook = Book(book["Name"], book["Author"], book["Summary"], book["Price"], book["Topic"])
+            db.session.add(databook)
+            db.session.commit()
 
 
 @app.route('/')
@@ -93,6 +103,13 @@ def forgot_password_conformation():
     return render_template('forgot_confirm.html')
 
 
-@app.route('/books')
-def books():
-    return render_template('books.html')
+@app.route('/books/<topic>')
+def books(topic):
+    all = Book.query.filter_by(topic=topic).all()
+    return render_template('books.html', all=all, Book=Book)
+
+
+@app.route('/book_info/<book_name>')
+def book_info(book_name):
+    book = Book.query.filter_by(name=book_name).first()
+    return render_template('book_info.html', book=book)

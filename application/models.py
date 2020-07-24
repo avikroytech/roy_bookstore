@@ -6,16 +6,18 @@ class Book(db.Model):
     __tablename__ = 'Book_Information'
 
     id = db.Column(db.Integer, primary_key=True)
-    author = db.Column(db.String(64), index=True)
-    name = db.Column(db.String(64), index=True)
-    summary = db.Column(db.String(1000), index=True)
-    price = db.Column(db.Float(3), index=True)
+    author = db.Column(db.String(64), index=True, nullable=False)
+    topic = db.Column(db.String(64), index=True, nullable=False)
+    name = db.Column(db.String(64), index=True, nullable=False)
+    summary = db.Column(db.String(1000), index=True, nullable=False)
+    price = db.Column(db.Float(3), index=True, nullable=False)
 
-    def __init__(self, name, author, summary, price):
+    def __init__(self, name, author, summary, price, topic):
         self.name = name
         self.author = author
         self.summary = summary
         self.price = price
+        self.topic = topic
 
 
 @login_manager.user_loader
@@ -27,11 +29,11 @@ class User(db.Model, UserMixin):
     __tablename__ = 'User_Information'
 
     id = db.Column(db.Integer, primary_key=True)
-    firstname = db.Column(db.String(64))
-    lastname = db.Column(db.String(64))
-    email = db.Column(db.String(64), unique=True, index=True)
-    username = db.Column(db.String(64), unique=True, index=True)
-    password = db.Column(db.String(128), index=True)
+    firstname = db.Column(db.String(64), nullable=False)
+    lastname = db.Column(db.String(64), nullable=False)
+    email = db.Column(db.String(64), unique=True, index=True, nullable=False)
+    username = db.Column(db.String(64), unique=True, index=True, nullable=False)
+    password = db.Column(db.String(128), index=True, nullable=False)
 
     def __init__(self, first, last, email, username, password):
         self.firstname = first

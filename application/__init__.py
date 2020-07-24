@@ -6,7 +6,6 @@ from flask_mail import Mail
 db = SQLAlchemy()
 mail = Mail()
 login_manager = LoginManager()
-email = 'avik.royjan@gmail.com'
 
 
 def create_app():

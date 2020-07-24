@@ -15,25 +15,17 @@
             integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
             crossorigin="anonymous"></script>
 </head>
-<body style="background-color: #182f4a;">
+<body style="background-color: #454545;">
 <nav class="navbar navbar-expand-lg bg-dark">
     <a class="navbar-brand" href="{{url_for('home')}}">Home</a>
     {% if current_user.is_authenticated %}
     <a class="nav-link" href="{{url_for('logout')}}">Logout</a>
-    <a><img src="../static/user_icon.svg">
-        <p></p>{{current_user.firstname}}</a>
-    <div class="card" style="width: 10rem; height: 10rem;">
-        <img src="https://icon-library.com/images/small-user-icon/small-user-icon-25.jpg" class="card-img-top" alt="Image not found">
-        <div class="card-body">
-            <p class="card-text">{{current_user.firstname}} {{current_user.lastname}}</p>
-        </div>
-    </div>
+    <a href="#" class="nav-link">{{current_user.firstname}}'s Account</a>
     {% else %}
     <a class="nav-link" href="{{url_for('login')}}">Login</a>
     {% endif %}
     <a class="nav-link" href="{{url_for('register')}}">Register</a>
 </nav>
-<ion-icon name="person-sharp"></ion-icon>
 {% block content %}
 {% endblock %}
 </body>
