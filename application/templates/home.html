@@ -4,6 +4,18 @@
     <a class="nav-link" href="/books/Children's">Children's Books</a>
     <a class="nav-link" href="/books/Fiction">Fiction Books</a>
 </nav>
+
+<div class="jumbotron">
+    {{resp}}
+    <ul>
+        Session DATA
+        {%for value in session%}
+        <li>{{value}}</li>
+        ->>> {%endfor%}
+    </ul>
+
+</div>
+
 {% for flash in get_flashed_messages() %}
 <div class="alert alert-danger alert-dismissible fade show" role="alert">
     {{flash}}

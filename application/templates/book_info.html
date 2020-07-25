@@ -1,5 +1,9 @@
 {% extends "base.html" %}
 {% block content %}
+<nav class="navbar navbar-expand-lg bg-dark">
+    <a class="nav-link" href="/books/Children's">Children's Books</a>
+    <a class="nav-link" href="/books/Fiction">Fiction Books</a>
+</nav>
 <div class="jumbotron">
     <h1>{{book.name}}</h1>
     <h3>by {{book.author}}</h3>
@@ -7,5 +11,6 @@
     <br>
     <br>
     <p>Price: ${{book.price}}0</p>
+    <img src="{{book.image}}" alt="No Image Found">
 </div>
 {% endblock %}

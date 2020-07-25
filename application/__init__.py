@@ -18,7 +18,9 @@ def create_app():
     login_manager.login_view = 'login'
 
     with app.app_context():
-        from application import routes  # Import routes
+        from application import main_routes  # Import routes
+        from application import book_routes
+        from application import login_routes
         db.create_all()  # Create sql tables for our data models
 
         return app

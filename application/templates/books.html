@@ -1,11 +1,15 @@
 {% extends "base.html" %}
 {% block content %}
+<nav class="navbar navbar-expand-lg bg-dark">
+    <a class="nav-link" href="/books/Children's">Children's Books</a>
+    <a class="nav-link" href="/books/Fiction">Fiction Books</a>
+</nav>
 <div class="jumbotron"
      style="background-color: #1e68bd; color: #454545; padding: 50px; border-width: 4px; border-color: #182f4a">
     <div class="card-columns">
         {%for book in all%}
         <div class="card" style="width: 18rem;">
-            <a href="/book_info/{{book.name}}"><img src="..." class="card-img-top" alt="Image Link"></a>
+            <a href="/book_info/{{book.name}}"><img src="{{book.image}}" class="card-img-top" alt="Image Link"></a>
             <div class="card-body">
                 <p class="card-text">{{book.name}} by {{book.author}} Price: ${{book.price}}0</p>
             </div>
