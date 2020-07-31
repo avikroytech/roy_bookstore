@@ -1,3 +1,16 @@
 {% extends "base.html" %}
 {% block content %}
+<div class="jumbotron">
+    <h1>{{current_user.firstname}}'s Cart:</h1>
+    <div class="container">
+        <h3>Books: </h3>
+        {%for book in books%}
+        <div>
+            <h5><strong>{{book.name}}</strong></h5>
+            <h6>by {{book.author}}</h6>
+        </div>
+        {%endfor%}
+    </div>
+    <br>
+</div>
 {% endblock %}

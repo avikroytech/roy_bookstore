@@ -1,10 +1,16 @@
 from flask import current_app as app
 from flask import render_template, redirect, url_for, flash, request
 from flask_login import login_required, logout_user, login_user
-from application.forms import LoginForm, RegisterForm, ForgotForm
-from application.models import User
-from application import mail, db
 from flask_mail import Message
+from application import mail, db
+from application.forms import LoginForm, RegisterForm, ForgotForm
+from application.models import User, Book
+
+"""Logging in and out
+        Login
+        Logout
+        Register
+        Forgot Password"""
 
 
 @app.route('/welcome')
@@ -88,6 +94,22 @@ def forgot_password_conformation():
     return render_template('forgot_confirm.html')
 
 
+"""Account Information
+        Account
+        Cart"""
+
+
 @app.route('/account_info/<name>')
 def account(name):
     return render_template('account.html', name=name)
+
+
+@app.route('/cart/<name>')
+def cart(name):
+    incoming_cookies_dict = request.cookies
+    values = eval(incoming_cookies_dict['cart_cookie']).values()
+    books = []
+    for value in values:
+        book = Book.query.filter_by(name=value).first()
+        books.append(book)
+    return render_template('cart.html', name=name, books=books)

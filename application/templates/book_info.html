@@ -8,9 +8,12 @@
     <h1>{{book.name}}</h1>
     <h3>by {{book.author}}</h3>
     <br>
-    <br>
-    <br>
     <p>Price: ${{book.price}}0</p>
     <img src="{{book.image}}" alt="No Image Found">
+    {%if not check%}
+    <a href="/add_to_cart/{{book.name}}"><input type="button" value="Add to cart"></a>
+    {%else%}
+    <a href="/cart/{{current_user.firstname}}"><input type="button" value="View in cart"></a>
+    {%endif%}
 </div>
 {% endblock %}

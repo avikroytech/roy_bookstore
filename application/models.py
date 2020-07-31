@@ -37,7 +37,6 @@ class User(db.Model, UserMixin):
     lastname = db.Column(db.String(64), nullable=False)
     email = db.Column(db.String(64), unique=True, index=True, nullable=False)
     username = db.Column(db.String(64), unique=True, index=True, nullable=False)
-    # books = db.relationship('Book', backref='users', lazy='dynamic', nullable=True)
     password = db.Column(db.String(128), index=True, nullable=False)
 
     def __init__(self, first, last, email, username, password):
@@ -60,15 +59,7 @@ class Cart:
         self.books = {}
 
     def add_book(self, book_id):
-        if book_id is int:
-            self.books[f'{book_id}'] = book_id
-            return True
-        else:
-            return False
+        self.books[f'{book_id}'] = book_id
 
     def remove_book(self, book_id):
-        if book_id is int:
-            del self.books[f'{book_id}']
-            return True
-        else:
-            return False
+        del self.books[f'{book_id}']
