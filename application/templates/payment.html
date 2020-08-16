@@ -58,6 +58,9 @@
 
 
 
+
+
+
 </style>
 <div id="all">
     <div id="content">
@@ -107,11 +110,9 @@
                                                         <div class="form-group mb-3">
                                                             <label for="inputAddress" id="addressLabel"
                                                                    class="text-muted text-light">Address</label>
-                                                            <input id="inputAddress" type="text"
-                                                                   placeholder="Address"
-                                                                   aria-describedby="addressLabel"
-                                                                   required="" autofocus=""
-                                                                   class="form-control rounded-pill border-2 shadow-sm px-4 text-primary">
+                                                            {{address.address(id="inputAddress", class_='form-control
+                                                            rounded-pill border-2 shadow-sm px-4 text-primary',
+                                                            aria-describedby='addressLabel')}}
                                                         </div>
                                                         <div class="form-group mb-3">
                                                             <label for="inputState" id="stateLabel"
@@ -182,21 +183,13 @@
                                  aria-describedby="#delivery-tab"
                                  class="tab-pane fade px-4 py-5 show">
                                 <form id="frm2">
+                                    <h3 class="display-3">Delivery Methods</h3>
                                     {%for radio in delivery.radio%}
                                     {{radio}}
                                     {{radio.label}}
                                     <br>
                                     {%endfor%}
                                 </form>
-                                <h3 class="display-3">Delivery Methods</h3>
-                                <input type="radio" name="method" value="method1" id="method1">
-                                <label for="method1">UPS Delivery: Fastest Way</label>
-                                <br>
-                                <input type="radio" name="method" value="method1" id="method2">
-                                <label for="method2">Shipping Delivery: Fast Way</label>
-                                <br>
-                                <input type="radio" name="method" value="method1" id="method3">
-                                <label for="method3">Plane Delivery: Slowest Way</label>
                                 <div class="row">
                                     <div class="col-md-2">
                                         <a id="forward3"
@@ -298,13 +291,13 @@
 <script>
 // Address
   $("#forward1").click(function() {
-    if ($("#frm")[0].checkValidity())
-        $('#guide-tabs li:eq(1) a').tab('show');
+    if ($("#frm")[0].checkValidity()) {
+        $('#guide-tabs li:eq(1) a').tab('show');}
   })
 // Delivery Methods
   $("#forward2").click(function() {
-    if ($("#frm2")[0].checkValidity())
-        $('#guide-tabs li:eq(2) a').tab('show');
+    if ($("#frm2")[0].checkValidity()) {
+        $('#guide-tabs li:eq(2) a').tab('show');}
   })
   $("#forward3").click(function() {
     $('#guide-tabs li:eq(0) a').tab('show');
@@ -320,6 +313,9 @@
   $("#forward6").click(function() {
     $('#guide-tabs li:eq(2) a').tab('show');
   })
+
+
+
 
 
 

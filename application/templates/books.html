@@ -1,6 +1,11 @@
 {% extends "base.html" %}
 {% block content %}
-<h2 class="display-4 text-white">{{topic}}'s Books</h2>
+<h2 class="display-4 text-white">
+    {%if topic == 'Graphic'%}
+    {{topic}} Novels
+    {%else%}
+    {{topic}} Books
+    {%endif%}</h2>
 <div class="separator"></div>
 <div id="all">
     <div>
