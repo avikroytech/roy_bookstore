@@ -1,3 +1,4 @@
+import ast
 from flask import current_app as app
 from flask import render_template, redirect, url_for, flash, request
 from flask_login import login_required, logout_user, login_user
@@ -33,10 +34,10 @@ def register():
                 db.session.add(user)
                 db.session.commit()
                 # msg = Message('Successful Register', sender='avik.royjan@gmail.com', recipients=[user.email])
-                # msg.body = f'You have successfully registered for Roy Book Store! Come and buy books,{user.firstname}!
+                # msg.body = f'You have successfully registered for Roy BookStore! Come and buy books,{user.firstname}!
                 # '
                 # mail.send(msg)
-                redirect(url_for('home'))
+                return redirect(url_for('login'))
             elif not result2:
                 flash('Username already registered!')
         elif not result1:
@@ -79,13 +80,12 @@ def forgot_password_form():
         email = form.email.data
         user = User.query.filter_by(email=email).first()
         if user:
-            msg = Message(subject='Forgot Password?', sender='avik.royjan@gmail.com', recipients=[email])
-            msg.body = f"""Username: {user.username}
-Password: {user.password}"""
+            msg = Message('Forgot Password?', sender='avik.royjan@gmail.com', recipients=[f'{email}'])
+            msg.body = f"Username: {user.username} Password: {user.password}"
             mail.send(msg)
             return redirect(url_for('forgot_password_conformation'))
         else:
-            flash('Email not registered! Please try again.')
+            flash('Email not registered! Please try again. Or register it in our registration form.')
     return render_template('forgot.html', form=form)
 
 
@@ -106,10 +106,23 @@ def account(name):
 
 @app.route('/cart/<name>')
 def cart(name):
-    incoming_cookies_dict = request.cookies
-    values = eval(incoming_cookies_dict['cart_cookie']).values()
-    books = []
-    for value in values:
-        book = Book.query.filter_by(name=value).first()
-        books.append(book)
-    return render_template('cart.html', name=name, books=books)
+    cookies = request.cookies
+    if 'cart_cookie' not in cookies:
+        return render_template('cart.html', check='cart_cookie' in cookies)
+    else:
+        cookie = cookies['cart_cookie']
+        cart_cookie = ast.literal_eval(cookie)
+        books = []
+        number = []
+        total = 0
+        for book_id in cart_cookie:
+            split_bookid = book_id.split('-')
+            bookid_str, num_of_books = [split_bookid[i] for i in (0, 1)]
+            book = Book.query.filter_by(name=bookid_str).first()
+            books.append(book)
+            number.append(num_of_books)
+            price = book.price * int(num_of_books)
+            total += price
+        return render_template('cart.html', name=name, books=books, check='cart_cookie' in cookies,
+                               cart_cookie=cart_cookie, number=number, index=books.index, total=total,
+                               length=len(cart_cookie))

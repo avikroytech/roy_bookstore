@@ -1,20 +1,174 @@
 {% extends "base.html" %}
 {% block content %}
-    <form method="POST">
-        {{ form.hidden_tag() }}
-        {{ form.first_name.label }} {{ form.first_name }}
-        {{ form.last_name.label }} {{ form.last_name }}
-        {{ form.email.label }} {{ form.email }}
-        {{ form.username.label }} {{ form.username }}
-        {{ form.password.label }} {{ form.password }}
-        {{ form.submit }}
-        {% for flash in get_flashed_messages() %}
-            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-          {{ flash }}
-          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times</span>
-          </button>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<style>
+.register{
+    background: -webkit-linear-gradient(left, #3931af, #00c6ff);
+    margin-top: 3%;
+    padding: 3%;
+}
+.register-left{
+    text-align: center;
+    color: #fff;
+    margin-top: 4%;
+}
+.register-left input{
+    border: none;
+    border-radius: 1.5rem;
+    padding: 2%;
+    width: 60%;
+    background: #f8f9fa;
+    font-weight: bold;
+    color: #383d41;
+    margin-top: 30%;
+    margin-bottom: 3%;
+    cursor: pointer;
+}
+.register-left button{
+    border: none;
+    border-radius: 1.5rem;
+    padding: 2%;
+    width: 60%;
+    background: #f8f9fa;
+    font-weight: bold;
+    color: #383d41;
+    margin-top: 30%;
+    margin-bottom: 3%;
+    cursor: pointer;
+}
+.register-right{
+    background: #f8f9fa;
+    border-top-left-radius: 10% 50%;
+    border-bottom-left-radius: 10% 50%;
+}
+.register-left i{
+    margin-top: 15%;
+    margin-bottom: 5%;
+    width: 25%;
+    -webkit-animation: mover 2s infinite  alternate;
+    animation: mover 1s infinite  alternate;
+}
+@-webkit-keyframes mover {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-20px); }
+}
+@keyframes mover {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-20px); }
+}
+.register-left p{
+    font-weight: lighter;
+    padding: 12%;
+    margin-top: -9%;
+}
+.register .register-form{
+    padding: 10%;
+    margin-top: 10%;
+}
+.btnRegister{
+    float: right;
+    margin-top: 10%;
+    border: none;
+    border-radius: 1.5rem;
+    padding: 2%;
+    background: #0062cc;
+    color: #fff;
+    font-weight: 600;
+    width: 50%;
+    cursor: pointer;
+}
+.register .nav-tabs{
+    margin-top: 3%;
+    border: none;
+    background: #0062cc;
+    border-radius: 1.5rem;
+    width: 28%;
+    float: right;
+}
+.register .nav-tabs .nav-link{
+    padding: 2%;
+    height: 34px;
+    font-weight: 600;
+    color: #fff;
+    border-top-right-radius: 1.5rem;
+    border-bottom-right-radius: 1.5rem;
+}
+.register .nav-tabs .nav-link:hover{
+    border: none;
+}
+.register .nav-tabs .nav-link.active{
+    width: 100px;
+    color: #0062cc;
+    border: 2px solid #0062cc;
+    border-top-left-radius: 1.5rem;
+    border-bottom-left-radius: 1.5rem;
+}
+.register-heading{
+    text-align: center;
+    margin-top: 8%;
+    margin-bottom: -15%;
+    color: #495057;
+}
+
+</style>
+<div class="container register">
+    <div class="row">
+        <div class="col-md-3 register-left">
+            <i class="fas fa-book fa-3x"></i>
+            <h3>Welcome</h3>
+            <h6>You are 30 seconds away from buying your own books!</h6>
+            <a href="/login">
+                <button>Login</button>
+            </a>
         </div>
-        {% endfor %}
-    </form>
-{% endblock %}
+        <div class="col-md-9 register-right">
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                    <h3 class="register-heading">Register for Roy Bookstore</h3>
+                    <form method="POST">
+                        {{form.hidden_tag()}}
+                        <div class="row register-form">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    {{form.first_name(class_='form-control', placeholder='First Name')}}
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                {{form.last_name(class_='form-control', placeholder='Last Name')}}
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    {{form.email(class_='form-control', placeholder='Email')}}
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    {{form.username(class_='form-control', placeholder='Username')}}
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    {{form.password(class_='form-control', placeholder='Password')}}
+                                </div>
+                                {{form.submit(class_='btnRegister', value='Register')}}
+                            </div>
+                            <div class="col-md-12">
+                                {%for flash in get_flashed_messages()%}
+                                <div class="alert alert-info alert-dismissable fade show">
+                                    {{flash}}
+                                    <button type="button" class="btn close" data-dismiss="alert" aria-hidden="true">×
+                                    </button>
+                                </div>
+                                {%endfor%}
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+{%endblock%}

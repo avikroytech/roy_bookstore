@@ -29,7 +29,7 @@ Shel Silverstein's children's books appeared in a format other than hardcover.""
                "Author": "Shel Silverstein",
                "Name": "The Giving Tree",
                "Topic": "Children's",
-               "Image": "https://images-na.ssl-images-amazon.com/images/I/71wiGMKadmL.jpg"}
+               "Image": "https://images-na.ssl-images-amazon.com/images/I/71wiGMKadmL._AC_UL320_SR242,320_.jpg"}
 
 wizard_of_oz = {"Price": 5.0,
                 "Summary": """The Wonderful Wizard of Oz is a novel of U.S. author L. Frank Baum. He is credited for 

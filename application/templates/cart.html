@@ -1,16 +1,148 @@
 {% extends "base.html" %}
 {% block content %}
-<div class="jumbotron">
-    <h1>{{current_user.firstname}}'s Cart:</h1>
-    <div class="container">
-        <h3>Books: </h3>
-        {%for book in books%}
-        <div>
-            <h5><strong>{{book.name}}</strong></h5>
-            <h6>by {{book.author}}</h6>
+<style>
+.vl {
+    border-left: 2px solid rgba(0, 0, 0, 0.1);
+    height: 100px;
+}
+
+
+
+
+
+</style>
+{%if check%}
+{%if cart_cookie == []%}
+<div id="all">
+    <div id="content">
+        <div class="row">
+            <div id="basket" class="col-lg-8">
+                <div class="box">
+                    <form method="post" action="checkout1.html">
+                        <h1>{{current_user.firstname}}'s cart</h1>
+                        <h3 class="text-muted">You currently have no books ordered, right now.</h3>
+                        <h5 class="text-muted">Check our book store for our books!</h5>
+                            <!-- /.table-responsive-->
+                            <div class="box-footer d-flex justify-content-between flex-column flex-lg-row">
+                                <div class="left"><a href="/books/Children's" class="btn btn-outline-secondary"><i
+                                        class="fa fa-chevron-left"></i> Continue shopping</a></div>
+                            </div>
+                    </form>
+                </div>
+                <!-- /.box-->
+            </div>
         </div>
-        {%endfor%}
     </div>
-    <br>
 </div>
+{%else%}
+<div id="all">
+    <div id="content">
+        <div class="row">
+            <div id="basket" class="col-lg-8">
+                <div class="box">
+                    <form method="post">
+                        <h1>{{current_user.firstname}}'s cart</h1>
+                        <p class="text-muted">You currently have {{length}} item(s) in your cart.</p>
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th colspan="2">Book</th>
+                                    <th></th>
+                                    <th>Book price</th>
+                                    <th># of type of book bought</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {%for book in books%}
+                                <tr>
+                                    <td><a href="/book_info/{{book.name}}"><img
+                                            src="{{book.image}}"
+                                            alt="White Blouse Armani"></a></td>
+                                    <td><a href="/book_info/{{book.name}}" class="text-dark" style="text-decoration: none;">{{book.name}}</a>
+                                    </td>
+                                    <td>
+                                        <div class="vl"></div>
+                                    </td>
+                                    <td>${{book.price}}0</td>
+                                    <td>{{number[index(book)]}}</td>
+                                    <td><a href="/remove_from_cart/{{book.name}}"><i class="fa fa-trash-o"></i></a></td>
+                                </tr>
+                                {%endfor%}
+                                </tbody>
+                                <tfoot>
+                                <tr>
+                                    <th colspan="5">Subtotal</th>
+                                    <th colspan="2">${{total}}0</th>
+                                </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                        <!-- /.table-responsive-->
+                        <div class="box-footer d-flex justify-content-between flex-column flex-lg-row">
+                            <div class="left"><a href="/books/Children's" class="btn btn-outline-secondary"><i
+                                    class="fa fa-chevron-left"></i> Continue shopping</a></div>
+                            <div class="right">
+                                <a href="{{url_for('payment')}}"><button type="button" class="btn btn-outline-primary">Proceed to checkout <i
+                                        class="fa fa-chevron-right"></i></button></a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <!-- /.box-->
+            </div>
+            <!-- /.col-lg-9-->
+            <div class="col-md-4">
+                <div id="order-summary" class="box">
+                    <div class="box-header">
+                        <h3 class="mb-0">Order summary</h3>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <tbody>
+                            <tr>
+                                <td>Order subtotal</td>
+                                <th>${{total}}0</th>
+                            </tr>
+                            <tr>
+                                <td>Tax</td>
+                                <th>$0.50</th>
+                            </tr>
+                            <tr class="total">
+                                <td>Total</td>
+                                <th>${{total + 0.5}}0</th>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!-- /.col-md-3-->
+        </div>
+    </div>
+</div>
+{%endif%}
+{%else%}
+<div id="all">
+    <div id="content">
+        <div class="row">
+            <div id="basket" class="col-lg-8">
+                <div class="box">
+                    <form method="post" action="checkout1.html">
+                        <h1>{{current_user.firstname}}'s cart</h1>
+                        <h3 class="text-muted">You currently have no books ordered, right now.</h3>
+                        <h5 class="text-muted">Check our book store for our books!</h5>
+                            <!-- /.table-responsive-->
+                            <div class="box-footer d-flex justify-content-between flex-column flex-lg-row">
+                                <div class="left"><a href="/books/Children's" class="btn btn-outline-secondary"><i
+                                        class="fa fa-chevron-left"></i> Continue shopping</a></div>
+                            </div>
+                    </form>
+                </div>
+                <!-- /.box-->
+            </div>
+        </div>
+    </div>
+</div>
+{%endif%}
 {% endblock %}
