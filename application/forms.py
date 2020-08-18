@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, SelectField, RadioField
-from wtforms.validators import DataRequired, Email
+from wtforms.validators import DataRequired, Email, Required, InputRequired
 from wtforms.fields.html5 import EmailField
 from application.models import User
 
@@ -48,19 +48,21 @@ class CheckoutForm(FlaskForm):
         address = StringField('Address', validators=[DataRequired()])
         city = StringField('City/Town', validators=[DataRequired()])
         state = StringField('State/Province', validators=[DataRequired()])
-        country = SelectField('State/Province', validators=[DataRequired()],
-                              choices=[('disabled', 'Please pick a choice'), ('canada', 'Canada'), ('usa', 'USA'),
-                                       ('india', 'India')])
+        country = SelectField('State/Province',
+                              choices=[('canada', 'Canada'), ('usa', 'USA'),
+                                       ('india', 'India')],
+                              validators=[InputRequired()])
         zip = StringField('Postal Code', validators=[DataRequired()])
 
     class DeliveryForm(FlaskForm):
         radio = RadioField('Delivery Methods', choices=[('UPS', 'UPS Delivery: Fastest Way'),
                                                         ('Shipping', 'Shipping Delivery: Fast Way'),
-                                                        ('Plane', 'Plane Delivery: Slowest Way')])
+                                                        ('Plane', 'Plane Delivery: Slowest Way')],
+                           validators=[DataRequired()])
 
     class PaymentForm(FlaskForm):
         radio = RadioField('Payment Methods', choices=[('paypal', 'PayPal'),
-                                                       ('credit', 'Credit Card'
-                                                                  'We accept these cards: Visa, Mastercard')])
+                                                       ('credit',
+                                                        'Credit Card We accept these cards: Visa, Mastercard')])
 
     submit = SubmitField('Pay')

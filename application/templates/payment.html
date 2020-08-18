@@ -42,25 +42,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 </style>
 <div id="all">
     <div id="content">
@@ -103,6 +84,7 @@
                                         <div class="container">
                                             <div class="col-md-12">
                                                 <h1 class="text-dark text-muted">Address</h1>
+                                                <h3 class="text-danger" id="errorHeader"></h3>
                                             </div>
                                             <div class="row">
                                                 <div class="col-lg-6">
@@ -110,31 +92,32 @@
                                                         <div class="form-group mb-3">
                                                             <label for="inputAddress" id="addressLabel"
                                                                    class="text-muted text-light">Address</label>
-                                                            {{address.address(id="inputAddress", class_='form-control
-                                                            rounded-pill border-2 shadow-sm px-4 text-primary',
-                                                            aria-describedby='addressLabel')}}
+                                                            {{address.address(id="inputAddress",
+                                                            class_='form-control rounded-pill border-2 shadow-sm px-4
+                                                            text-primary',
+                                                            **{'aria-describedby':'addressLabel',
+                                                            'placeholder':'Address'})}}
                                                         </div>
                                                         <div class="form-group mb-3">
                                                             <label for="inputState" id="stateLabel"
                                                                    class="text-muted text-light">State/Province</label>
-                                                            <input id="inputState"
-                                                                   type="password"
-                                                                   placeholder="State"
-                                                                   required=""
-                                                                   aria-describedby="statelabel"
-                                                                   class="form-control rounded-pill border-2 shadow-sm px-4 text-primary">
+                                                            {{address.state(id="inputState",
+                                                            class_='form-control rounded-pill border-2 shadow-sm px-4
+                                                            text-primary',
+                                                            **{'aria-describedby':'stateLabel',
+                                                            'placeholder':'State'})}}
                                                         </div>
                                                         <div class="form-group mb-3">
                                                             <label for="inputZip" id="codeLabel"
                                                                    class="text-muted text-light">Postal Code</label>
-                                                            <input id="inputZip" type="text"
-                                                                   placeholder="Postal Code"
-                                                                   aria-describedby="codeLabel"
-                                                                   required="" autofocus=""
-                                                                   class="form-control rounded-pill border-2 shadow-sm px-4 text-primary">
+                                                            {{address.zip(id="inputZip",
+                                                            class_='form-control rounded-pill border-2 shadow-sm px-4
+                                                            text-primary',
+                                                            **{'aria-describedby':'stateLabel',
+                                                            'placeholder':'Postal Code'})}}
                                                         </div>
                                                         <div class="col-md-4">
-                                                            <a id="forward1"
+                                                            <a id="forward1" name="forward1"
                                                                class="btn btn-sm btn-primary btn-block text-uppercase">
                                                                 Delivery method <i class="fas fa-chevron-right"></i>
                                                             </a>
@@ -163,14 +146,8 @@
                                                         <div class="form-group mb-3">
                                                             <label for="inputPassword" id="countryLabel"
                                                                    class="text-muted text-light">Country/Territory</label>
-                                                            <select class="form-control rounded-pill border-2 shadow-sm px-4 "
-                                                                    id="inputPassword">
-                                                                <option disabled="disabled">Please pick a country
-                                                                </option>
-                                                                <option value="canada">Canada</option>
-                                                                <option value="usa">USA</option>
-                                                                <option value="india">India</option>
-                                                            </select>
+                                                            {{address.country(class_="form-control rounded-pill border-2
+                                                            shadow-sm px-4", id="inputPassword")}}
                                                         </div>
                                                     </form>
                                                 </div>
@@ -182,8 +159,9 @@
                             <div id="delivery" role="tabpanel" aria-labelledby="#delivery-tab"
                                  aria-describedby="#delivery-tab"
                                  class="tab-pane fade px-4 py-5 show">
-                                <form id="frm2">
-                                    <h3 class="display-3">Delivery Methods</h3>
+                                <form id="frm2" method="POST">
+                                    <h1 class="text-muted text-dark">Delivery Methods</h1>
+                                    <h3 class="text-danger" id="errorHeader2"></h3>
                                     {%for radio in delivery.radio%}
                                     {{radio}}
                                     {{radio.label}}
@@ -208,13 +186,15 @@
                                  aria-describedby="#payment-tab"
                                  class="tab-pane fade px-4 py-5 show">
                                 <h1 class="text-muted text-dark">Payment Method</h1>
-                                <input type="radio" name="paycheck" value="paypal" id="paypal">
-                                <label class="text-dark" for="paypal"><i class="fab fa-paypal"></i>PayPal</label>
-                                <br>
-                                <input type="radio" name="paycheck" value="credit" id="credit">
-                                <label class="text-dark" for="credit"><i class="fas fa-credit-card"></i>Credit Card <br>
-                                    We accept these cards: <i class="fab fa-cc-visa"></i>Visa <i
-                                            class="fab fa-cc-mastercard"></i>Mastercard</label>
+                                <h3 id="errorHeader3"></h3>
+                                <form id="frm3">
+                                    {%for radio in pay.radio%}
+
+                                    {{radio}}
+                                    {{radio.label}}
+                                    <br>
+                                    {%endfor%}
+                                </form>
                                 <div class="row">
                                     <div class="col-md-4">
                                         <a id="forward4"
@@ -291,36 +271,26 @@
 <script>
 // Address
   $("#forward1").click(function() {
-    if ($("#frm")[0].checkValidity()) {
-        $('#guide-tabs li:eq(1) a').tab('show');}
+    $('#guide-tabs li:eq(1) a').tab('show');
   })
 // Delivery Methods
   $("#forward2").click(function() {
-    if ($("#frm2")[0].checkValidity()) {
-        $('#guide-tabs li:eq(2) a').tab('show');}
+    $('#guide-tabs li:eq(2) a').tab('show');
   })
   $("#forward3").click(function() {
     $('#guide-tabs li:eq(0) a').tab('show');
   })
 // Payment Method
   $("#forward4").click(function() {
-    $('#guide-tabs li:eq(1) a').tab('show');
+   $('#guide-tabs li:eq(1) a').tab('show');
   })
   $("#forward5").click(function() {
-    $('#guide-tabs li:eq(3) a').tab('show');
+        $('#guide-tabs li:eq(3) a').tab('show');}
   })
 // Order Review
   $("#forward6").click(function() {
     $('#guide-tabs li:eq(2) a').tab('show');
   })
-
-
-
-
-
-
-
-
 </script>
 <!-- /.col-lg-9-->
 {%endblock%}

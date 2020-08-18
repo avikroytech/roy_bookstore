@@ -88,10 +88,10 @@ def remove_from_cart(book_id):
 @login_required
 def payment():
     cookies = request.cookies
-    checkout = CheckoutForm()
-    address = checkout.AddressForm()
-    delivery = checkout.DeliveryForm()
-    pay = checkout.PaymentForm()
+    checkoutform = CheckoutForm()
+    addressform = checkoutform.AddressForm()
+    deliveryform = checkoutform.DeliveryForm()
+    payform = checkoutform.PaymentForm()
     if 'cart_cookie' not in cookies:
         return render_template('cart.html', check='cart_cookie' in cookies)
     else:
@@ -109,4 +109,4 @@ def payment():
             price = book.price * int(num_of_books)
             total += price
         return render_template('payment.html', books=books, number=number, index=books.index, total=total,
-                               checkout=checkout, address=address, delivery=delivery, pay=pay)
+                               checkout=checkoutform, address=addressform, delivery=deliveryform, pay=payform)
