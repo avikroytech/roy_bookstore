@@ -3,7 +3,7 @@ import json
 import random
 from flask import current_app as app, make_response, render_template, request, redirect
 from flask_login import current_user, login_required
-
+import stripe
 from application.forms import CheckoutForm
 from application.models import Book
 
@@ -110,3 +110,23 @@ def payment():
             total += price
         return render_template('payment.html', books=books, number=number, index=books.index, total=total,
                                checkout=checkoutform, address=addressform, delivery=deliveryform, pay=payform)
+
+
+@app.route('/charge', methods=['POST'])
+def charge():
+    # Amount in cents
+    amount = 500
+
+    customer = stripe.Customer.create(
+        email='customer@example.com',
+        source=request.form['stripeToken']
+    )
+
+    charge = stripe.Charge.create(
+        customer=customer.id,
+        amount=amount,
+        currency='usd',
+        description='Flask Charge'
+    )
+
+    return render_template('charge.html', amount=amount)

@@ -1,8 +1,10 @@
+import os
 from flask import current_app as app
-from flask import render_template
+from flask import render_template, request
 from application import db
 from application.bookinfo import books
 from application.models import Book
+import stripe
 
 for topic in books:
     for book in topic:
@@ -12,6 +14,13 @@ for topic in books:
             databook = Book(book["Name"], book["Author"], book["Summary"], book["Price"], book["Topic"], book["Image"])
             db.session.add(databook)
             db.session.commit()
+
+stripe_keys = {
+    "secret_key": os.environ["STRIPE_SECRET_KEY"],
+    "publishable_key": os.environ["STRIPE_PUBLISHABLE_KEY"]
+}
+
+stripe.api_key = stripe_keys["secret_key"]  
 
 
 @app.route('/')

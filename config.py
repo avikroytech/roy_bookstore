@@ -1,5 +1,6 @@
 from os import environ, path
 from dotenv import load_dotenv
+import stripe
 
 basedir = path.abspath(path.dirname(__file__))
 load_dotenv(path.join(basedir, '.env'))
@@ -23,3 +24,6 @@ class Config:
     MAIL_PASSWORD = environ.get('MAIL_PASSWORD')
     MAIL_USE_TLS = environ.get('MAIL_USE_TLS')
     MAIL_USE_SSL = environ.get('MAIL_USE_SSL')
+
+    # Stripe
+    stripe.api_key = environ.get('SECRET_KEY')
