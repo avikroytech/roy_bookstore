@@ -85,10 +85,12 @@
     <h4>Alert!</h4>
     <p class="text-success">{{flash}}</p>
     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">Dismiss</span>
+        <span aria-hidden="true">&times;</span>
     </button>
 </div>
 {%endfor%}
+{%block welcome%}
+{%endblock%}
 <h1 class="display-1 text-center text-light">Welcome to Roy Bookstore!</h1>
 <div class="MySlider-container">
     <div id="carouselExampleInterval" class="carousel slide" data-ride="carousel">
@@ -102,7 +104,7 @@
                      class="d-block w-100" alt="...">
             </div>
             <div class="carousel-item" data-interval="200000">
-                <img style="height: 700px; width: 950px;" src="https://m.media-amazon.com/images/I/51UoqRAxwEL.jpg" class="d-block w-100" alt="...">
+                <img style="height: 700px; width: 1000px;" src="https://m.media-amazon.com/images/I/51UoqRAxwEL.jpg" class="d-block w-100" alt="...">
             </div>
         </div>
         <a class="carousel-control-prev" href="#carouselExampleInterval" role="button" data-slide="prev">

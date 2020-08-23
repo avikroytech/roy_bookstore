@@ -1,6 +1,9 @@
-{% extends "base.html" %}
-{% block content %}
-<div class="jumbotron" style="background-color: #1e68bd; color: #454545; padding: 50px;">
-    <h1 class="display-6">Welcome, {{ current_user.firstname }}!</h1>
+{% extends "home.html" %}
+{% block welcome %}
+<div class="alert alert-message alert-message-success alert-dismissible fade show" role="alert">
+    <h3 class="display-3">Welcome, {{current_user.firstname}}</h3>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
 </div>
 {% endblock %}
