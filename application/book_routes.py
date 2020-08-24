@@ -32,7 +32,7 @@ def add_to_cart(book_id):
     resp = make_response(redirect(f'/cart/{current_user.firstname}'))
     updated_bookid_and_number = []
     book_ids = []
-    if 'cart_cookie' in incoming_cookies_dict:
+    if 'cart_cookie' in incoming_cookies_dict.keys():
         cart_cookie_list = eval(incoming_cookies_dict['cart_cookie'])
         # entry of the list is : bookid-n where n is the number of books added
         for bookid_and_number in cart_cookie_list:
