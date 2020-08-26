@@ -6,10 +6,6 @@
     height: 100px;
 }
 
-
-
-
-
 </style>
 {%if check%}
 {%if cart_cookie == []%}
@@ -35,6 +31,46 @@
     </div>
 </div>
 {%else%}
+<style>
+.alert-message
+{
+    margin: 20px 0;
+    padding: 20px;
+    border-left: 3px solid #eee;
+}
+.alert-message h4
+{
+    margin-top: 0;
+    margin-bottom: 5px;
+}
+.alert-message p:last-child
+{
+    margin-bottom: 0;
+}
+.alert-message code
+{
+    background-color: #fff;
+    border-radius: 3px;
+}
+.alert-message-success
+{
+    background-color: #F4FDF0;
+    border-color: #3C763D;
+}
+.alert-message-success h4
+{
+    color: #3C763D;
+}
+</style>
+{% for flash in get_flashed_messages() %}
+<div class="alert alert-message alert-message-success alert-dismissible fade show">
+    <h4>Alert!</h4>
+    <p class="text-success">{{flash}}</p>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+{%endfor%}
 <div id="all">
     <div id="content">
         <div class="row">

@@ -57,7 +57,7 @@ def login():
             next_page = request.args.get('next')
             if next_page is not None or type(next_page) == "<class 'list'>":
                 if next_page[0] != '/':
-                    return redirect(next_page)
+                    return redirect(next_page[0])
             else:
                 return redirect(url_for('welcome'))
         else:
