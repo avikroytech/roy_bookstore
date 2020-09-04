@@ -1,4 +1,3 @@
-import json
 import os
 import stripe
 from flask import current_app as app, jsonify, flash, redirect, request, make_response
@@ -82,10 +81,9 @@ def create_checkout_session():
 @app.route("/success")
 def success():
     flash('Transaction succeeded')
-    resp = make_response()
-    empty_list = json.dumps('[]').encode('utf-8')
-    resp.delete_cookie(key='cart_cookie', path='/')
-    return redirect(f'/cart/{current_user.firstname}')
+    resp = make_response(redirect(f'/cart/{current_user.firstname}'))
+    resp.delete_cookie('cart_cookie')
+    return resp
 
 
 @app.route("/cancelled")

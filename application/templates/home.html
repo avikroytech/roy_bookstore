@@ -76,11 +76,9 @@
     color: #444;
 }
 .MySlider-container {
-    height: 60px
-    max-height: 60px
-    border-radius: 25px;
+    margin-left: 200px;
+    margin-right: 200px;
 }
-
 </style>
 {% for flash in get_flashed_messages() %}
 <div class="alert alert-message alert-message-success alert-dismissible fade show">
@@ -98,18 +96,18 @@
     <div id="carouselExampleInterval" class="carousel slide" data-ride="carousel">
         <div class="carousel-inner">
             <div class="carousel-item active" data-interval="200000">
-                <img style="height: 700px; width: 950px;border-radius: 25px;border-color: #787878;"
+                <img
                      src="https://images-na.ssl-images-amazon.com/images/I/61nYp5rfV9L.jpg"
-                     class="d-block w-100" alt="...">
+                     alt="...">
             </div>
             <div class="carousel-item" data-interval="200000">
-                <img style="height: 700px; width: 950px;border-radius: 25px;border-color: #787878;"
+                <img
                      src="https://images-na.ssl-images-amazon.com/images/I/71wiGMKadmL._AC_UL320_SR242,320_.jpg"
-                     class="d-block w-100" alt="...">
+                     alt="...">
             </div>
             <div class="carousel-item" data-interval="200000">
-                <img style="height: 700px; width: 950px;border-radius: 25px;border-color: #787878;"
-                     src="https://m.media-amazon.com/images/I/51UoqRAxwEL.jpg" class="d-block w-100" alt="...">
+                <img
+                     src="https://m.media-amazon.com/images/I/51UoqRAxwEL.jpg" alt="...">
             </div>
         </div>
         <a class="carousel-control-prev" href="#carouselExampleInterval" role="button" data-slide="prev">
