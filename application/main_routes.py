@@ -5,7 +5,7 @@ from flask_login import current_user
 from flask import render_template
 from application import db
 from application.bookinfo import books
-from application.models import Book
+from application.models import Book, User
 
 for topic in books:
     for book in topic:
@@ -90,3 +90,11 @@ def success():
 def cancelled():
     flash('Transaction cancelled')
     return redirect(f'/cart/{current_user.firstname}')
+
+
+@app.route('/delete')
+def delete():
+    vivek = User.query.filter_by(username='vivek').first()
+    db.session.delete(vivek)
+    db.session.commit()
+    return str(vivek)

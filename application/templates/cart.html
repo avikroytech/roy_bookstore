@@ -9,6 +9,15 @@
 </style>
 {%if check%}
 {%if cart_cookie == []%}
+{% for flash in get_flashed_messages() %}
+<div class="alert alert-message alert-message-success alert-dismissible fade show">
+    <h4>Alert!</h4>
+    <p class="text-success">{{flash}}</p>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+{%endfor%}
 <div id="all">
     <div id="content">
         <div class="row">
@@ -159,6 +168,15 @@
 </div>
 {%endif%}
 {%else%}
+{% for flash in get_flashed_messages() %}
+<div class="alert alert-message alert-message-success alert-dismissible fade show">
+    <h4>Alert!</h4>
+    <p class="text-success">{{flash}}</p>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+{%endfor%}
 <div id="all">
     <div id="content">
         <div class="row">

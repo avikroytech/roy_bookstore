@@ -33,10 +33,9 @@ def register():
                             password=form.password.data)
                 db.session.add(user)
                 db.session.commit()
-                # msg = Message('Successful Register', sender='avik.royjan@gmail.com', recipients=[user.email])
-                # msg.body = f'You have successfully registered for Roy BookStore! Come and buy books,{user.firstname}!
-                # '
-                # mail.send(msg)
+                msg = Message('Successful Register', sender='avik.royjan@gmail.com', recipients=[user.email])
+                msg.body = f'You have successfully registered for Roy BookStore! Come and buy books,{user.firstname}!'
+                mail.send(msg)
                 return redirect(url_for('login'))
             elif not result2:
                 flash('Username already registered!')
